@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>UI Repository</title>
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+        {% block 'extra_head' %}
+        {% endblock 'extra_head' %}
+    </head>
+
+    <body class="bg-gray-900 text-white flex flex-col min-h-screen">
+        <header class="p-4 flex items-center justify-between bg-blue-900">
+            <a href="/" class="text-xl font-bold">UI Repository</a>
+            <nav class="flex items-center">
+                {% comment %} <a href="#" class="mr-4">About</a> {% endcomment %}
+                {% if user.is_authenticated and not request.user.is_anonymous %}
+                    {% if not request.resolver_match.url_name == 'upload' %}
+                        <a href="/upload/" class="mr-6 bg-white hover:bg-white-700 text-blue-900 font-semibold py-2 px-4 rounded">+ Upload</a>
+                    {% endif %}
+                    <div class="relative">
+                        <div class="h-12 w-12 mr-2 rounded-full overflow-hidden cursor-pointer" id="profileImage">
+                            <img src="{% if request.user.social_profile_picture %}{{ request.user.social_profile_picture }}{% elif request.user.profile_picture %}/uploads/{{ request.user.profile_picture }}{% else %}/uploads/default-profile.png{% endif %}" class="object-cover h-full w-full">
+                        </div>
+                        <div id="dropdownMenu" class="hidden absolute top-12 right-0 bg-gray-800 w-40 py-2 rounded shadow-md">
+                            <a href="/accounts/profile" class="block px-4 py-2 hover:bg-gray-700">Profile</a>
+                            <a href="/accounts/logout" class="block px-4 py-2 hover:bg-gray-700">Logout</a>
+                        </div>
+                    </div>
+                {% elif request.resolver_match.url_name == 'login' or request.resolver_match.url_name == 'signup' %}
+                    {# Nothing #}
+                {% else %}
+                    <a href="/accounts/login" class="mr-2 bg-transparent hover:bg-white text-white font-semibold hover:text-blue-600 py-2 px-4 border border-white hover:border-transparent rounded">Login</a>
+                    <a href="/accounts/signup" class="bg-transparent hover:bg-white text-white font-semibold hover:text-blue-600 py-2 px-4 border border-white hover:border-transparent rounded" >Sign Up</a>
+                {% endif %}
+
+            </nav>
+        </header>
+
+        {% block 'body' %}
+        {% endblock 'body' %}
+
+        <footer class="flex flex-col md:flex-row justify-between items-center px-8 py-6 mt-24">
+            <div class="mb-4 md:mb-0">
+                <h2 class="text-xl font-bold">&copy; 2023 UIRepository</h2>
+                <p class="text-sm">UI Code Gallery by Programmers</p>
+            </div>
+            <div>
+                <ul class="flex space-x-4">
+                    {% comment %} <li><a href="{% url 'about' %}" class="text-gray-400 mr-4 hover:text-white">About</a></li>
+                    <li><a href="{% url 'contact' %}" class="text-gray-400 mr-4 hover:text-white">Contact</a></li>
+                    <li><a href="{% url 'privacy_policy' %}" class="text-gray-400 hover:text-white">Privacy Policy</a></li> {% endcomment %}
+                </ul>
+            </div>
+        </footer>
+          
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+            const profileImage = document.getElementById("profileImage");
+            const dropdownMenu = document.getElementById("dropdownMenu");
+
+            profileImage.addEventListener("click", function () {
+                dropdownMenu.classList.toggle("hidden");
+            });
+
+            document.addEventListener("click", function (event) {
+                if (!dropdownMenu.contains(event.target) && !profileImage.contains(event.target)) {
+                dropdownMenu.classList.add("hidden");
+                }
+            });
+            });
+        </script>
+        {% block 'javascript' %}
+        {% endblock 'javascript' %}
+    </body>
+</html>

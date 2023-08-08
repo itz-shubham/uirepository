@@ -1,0 +1,98 @@
+{% extends 'account/base.html' %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Profile" %}{% endblock %}
+
+{% block content %}
+<main class="container mx-auto px-4 mt-8 flex-1">
+    <div class="max-w-xl mx-auto bg-gray-800 p-8 rounded-md shadow-md">
+        <h1 class="text-2xl font-semibold text-center">{% trans "Profile" %}</h1>
+        <form class="mt-6" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% if errors.error_all %}
+                <p class="errortext mb-6">{{ errors.error_all }}</p>
+            {% endif %}
+
+            <div class="flex items-center justify-center mb-6">
+                <label for="id_profile_picture" class="cursor-pointer">
+                  <img id="preview_photo" src="{% if request.user.profile_picture %}/uploads/{{ request.user.profile_picture }}{% else %}/uploads/default-profile.png{% endif %}" alt="Profile Photo" class="w-32 h-32 rounded-full border-2 border-gray-300">
+                  <input type="file" id="id_profile_picture" name="profile_picture" class="hidden" accept="image/*" onchange="previewProfilePhoto(event)">
+                </label>
+            </div>
+          
+            <div class="mb-4">
+                <div class="flex">
+                    <div class="w-1/2 mr-2">
+                        <label for="first_name">First Name</label>
+                        <input type="text" id="id_first_name" name="first_name" value="{{ request.user.first_name }}">
+                    </div>
+                    <div class="w-1/2 ml-2">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" id="id_last_name" name="last_name" value="{{ request.user.last_name }}">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-4">
+                <label for="username">Username</label>
+                <input type="text" id="id_username" name="username" value="{{ request.user.username }}">
+                {% if errors.username %}
+                    <ul class="errorlist">
+                        {% for err in errors.username %}<li>{{err}}</li>{% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <div class="mb-4">
+                <label for="buymeacoffee">Buymeacoffee link</label>
+                <input type="text" id="id_buymeacoffee" name="buymeacoffee" value="{% if request.user.buymeacoffee %}{{ request.user.buymeacoffee }}{% else %}https://www.buymeacoffee.com/{% endif %}">
+                {% if errors.buymeacoffee %}
+                    <ul class="errorlist">
+                        {% for err in errors.buymeacoffee %}<li>{{err}}</li>{% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            
+        <!-- 
+            <div>
+            <label>Social Media Links</label>
+                <div class="mt-1">
+                    <input type="text" placeholder="Facebook" class="mb-2">
+                    <input type="text" placeholder="Github" class="mb-2">
+                    <input type="text" placeholder="Instagram" class="mb-2">
+                    <input type="text" placeholder="Twitter" class="mb-2">
+                    <input type="text" placeholder="Youtube" class="mb-2">
+                </div>
+            </div>
+        -->
+
+            <div class="flex justify-center mt-6">
+                <button type="submit" class="primaryAction w-2/3 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded mt-4">
+                    {% trans "Update Profile" %}
+                </button>
+            </div>
+
+        </form>
+    </div>
+</main>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    function previewProfilePhoto(event) {
+      const fileInput = event.target;
+      const previewPhoto = document.getElementById('preview_photo');
+
+      if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+          previewPhoto.src = e.target.result;
+        };
+
+        reader.readAsDataURL(fileInput.files[0]);
+      }
+    }
+  </script>
+{% endblock %}

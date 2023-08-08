@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block 'extra_head' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'accounts/form.css' %}">
+<style>
+    .wmd-wrapper h1, .wmd-wrapper h2, .wmd-wrapper h3, .wmd-wrapper h4, .wmd-wrapper h5, .wmd-wrapper h6 {
+        background: transparent !important;
+        color: white !important;
+    }
+    .editormd-dialog {
+        background-color: #363F4B !important;
+        color: white !important;
+    }
+    .editormd-form {
+        color: white !important;
+    }
+</style>
+{% endblock 'extra_head' %}
+
+{% block 'body' %}
+<main class="container mx-auto px-4 mt-8 flex-1">
+    <div class="container mx-auto my-10 px-4">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form }}
+            <div class="flex justify-center mt-6">
+                <button type="submit" class="primaryAction w-2/3 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded mt-4">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+    
+</main>
+{% endblock 'body' %}

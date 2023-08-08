@@ -1,0 +1,51 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{% block head_title %}{% endblock %}</title>
+        {% block extra_head %}
+        {% endblock %}
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'accounts/form.css' %}">
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+    </head>
+
+    <body class="bg-gray-900 text-white flex flex-col min-h-screen">
+      <header class="p-4 flex items-center justify-between bg-blue-900">
+            <!-- Logo -->
+            <a href="/" class="text-xl font-bold">UI Repository</a>
+            <!-- Navigation and Sign In/Sign Up Buttons -->
+            <nav class="flex items-center">
+                {% if user.is_authenticated and not request.user.is_anonymous %}
+                    <a href="/">
+                        <div class="h-12 w-12 mr-2 rounded-full overflow-hidden">
+                            <img src="{% if request.user.social_profile_picture %}{{ request.user.social_profile_picture }}{% elif request.user.profile_picture %}/uploads/{{ request.user.profile_picture }}{% else %}/uploads/default-profile.png{% endif %}" alt="User Avatar" class="object-cover h-full w-full">
+                        </div>
+                    </a>
+                {% endif %}
+            </nav>
+        </header>
+
+        {% block content %}
+        {% endblock %}
+
+        <footer class="flex flex-col md:flex-row justify-between items-center px-8 py-6 mt-24">
+            <div class="mb-4 md:mb-0">
+                <h2 class="text-xl font-bold">&copy; 2023 UIRepository</h2>
+                <p class="text-sm">UI Code Gallery by Programmers</p>
+            </div>
+            <div>
+                <ul class="flex space-x-4">
+                    {% comment %} <li><a href="{% url 'about' %}" class="text-gray-400 mr-4 hover:text-white">About</a></li>
+                    <li><a href="{% url 'contact' %}" class="text-gray-400 mr-4 hover:text-white">Contact</a></li>
+                    <li><a href="{% url 'privacy_policy' %}" class="text-gray-400 hover:text-white">Privacy Policy</a></li> {% endcomment %}
+                </ul>
+            </div>
+        </footer>
+
+        {% block javascript %}
+        {% endblock %}
+    </body>
+</html>

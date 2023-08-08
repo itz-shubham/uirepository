@@ -1,0 +1,63 @@
+form label {
+    display: block;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 0.4rem;
+}
+
+form input {
+    padding: 0.5rem 1rem;
+    background-color: rgba(17, 24, 39, 1);
+    border-color: rgba(75, 85, 99, 1);
+    border-width: 1px;
+    border-radius: .375rem;
+    width: 100%;
+}
+
+form ul.errorlist {
+    color: red;
+    font-size: small;
+    padding-top: 2px;
+    padding-left: 2px;
+}
+
+form .errortext {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    font-size: 12;
+}
+
+form select {
+    padding: 1rem;
+    background-color: rgba(17, 24, 39, 1);
+    border-color: rgba(75, 85, 99, 1);
+    border-width: 1px;
+    border-radius: .375rem;
+    width: 100%;
+}
+
+form .helptext {
+    color: aquamarine;
+    font-size: small;
+    padding-top: 2px;
+    padding-left: 2px;
+}
+
+
+/* Google Login Button */
+.google-login-btn {
+    background-color: white;
+    color: black;
+    border-radius: 4px;
+    padding: 10px 16px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.google-login-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+}

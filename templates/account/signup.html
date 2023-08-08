@@ -1,0 +1,72 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load socialaccount %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+
+<main class="container mx-auto px-4 mt-8 flex-1">
+  <div class="max-w-xl mx-auto bg-gray-800 p-8 rounded-md shadow-md">
+      <h1 class="text-2xl font-semibold mb-12 text-center">{% trans "Sign Up" %}</h1>
+
+      <form class="mt-6" method="POST" action="{% url 'account_signup' %}">
+
+          {% if form.non_field_errors %}
+              <p class="errortext">
+              {% for error in form.non_field_errors %}
+                  {{ error }}
+              {% endfor %}
+              </p>
+          {% endif %}
+          
+          {% csrf_token %}
+
+          {{ form.email.label_tag }}
+          {{ form.email }}
+          {{ form.email.errors }}
+
+          {{ form.password1.label_tag }}
+          {{ form.password1 }}
+          {{ form.password1.errors }}
+
+          {{ form.password2.label_tag }}
+          {{ form.password2 }}
+          {{ form.password2.errors }}
+
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
+
+          <div class="flex justify-center mt-2">
+              <button type="submit" class="primaryAction w-2/3 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded mt-4">
+                  {% trans "Sign Up" %}
+              </button>
+          </div>
+      </form>
+
+      <div>
+          <p class="flex justify-center text-gray-500 my-4"> -- Or -- </p>
+      </div>
+
+      <div class="flex justify-center">
+          <form method="post" action="{% provider_login_url 'google' %}">
+              {% csrf_token %}
+              <button onclick="googleLogin()" class="google-login-btn">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google Logo" class="google-login-icon">
+                  Continue with Google
+              </button>
+          </form>
+      </div>
+
+      <p class="mt-4 text-center text-gray-300">
+          {% blocktrans %}Already have an account? 
+          <a href="{{ login_url }}" class="text-blue-500 hover:underline">Login</a>
+          {% endblocktrans %}
+      </p>    
+      
+  </div>
+</main>
+
+{% endblock %}

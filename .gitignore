@@ -1,0 +1,18 @@
+# Super Secure env file
+.env
+
+# Database
+db.sqlite3
+
+# python binaries
+**/__pycache__
+
+# migrations
+**/migrations/*
+
+# Static Folder
+static/*
+
+# 
+uploads/*/
+secrets.txt
