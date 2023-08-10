@@ -21,7 +21,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True, blank=False)
     profile_picture = ResizedImageField(size=[300, 300], crop=['middle', 'center'], upload_to=profileImagePath, null=True, blank=True)
     social_profile_picture = models.CharField(max_length=256, blank=True, null=True)
-    buymeacoffee = models.CharField(max_length=25, blank=True, null=True)
+    buymeacoffee = models.CharField(max_length=55, blank=True, null=True)
 
     def __str__(self) -> str:
         return f"{self.pk}. {self.email} ({self.username})"

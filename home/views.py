@@ -116,7 +116,7 @@ def profile(request):
                 user.username = request.POST['username']
         if(request.POST['buymeacoffee']):
             prefix = 'https://www.buymeacoffee.com/'
-            if request.POST['buymeacoffee'].startswith(prefix) and len(request.POST['buymeacoffee']) > len(prefix):
+            if request.POST['buymeacoffee'].startswith(prefix) and (len(prefix) < len(request.POST['buymeacoffee']) <= 55):
                 user.buymeacoffee = request.POST['buymeacoffee']
             elif request.POST['buymeacoffee'] == prefix:
                 user.buymeacoffee = ''
