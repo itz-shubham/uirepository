@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block 'extra_head' %}
+{% block extra_head %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'accounts/form.css' %}">
 <style>
@@ -16,9 +16,9 @@
         color: white !important;
     }
 </style>
-{% endblock 'extra_head' %}
+{% endblock extra_head %}
 
-{% block 'body' %}
+{% block body %}
 <main class="container mx-auto px-4 mt-8 flex-1">
     <div class="container mx-auto my-10 px-4">
         <form method="post" enctype="multipart/form-data">
@@ -34,4 +34,4 @@
     </div>
     
 </main>
-{% endblock 'body' %}
+{% endblock body %}
