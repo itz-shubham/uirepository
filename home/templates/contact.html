@@ -1,0 +1,40 @@
+{% extends 'account/base.html' %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Contact" %}{% endblock %}
+
+{% block content %}
+<main class="container mx-auto px-4 mt-8 flex-1">
+    <div class="max-w-xl mx-auto bg-gray-800 p-8 rounded-md shadow-md">
+        
+        {% if success_message %}
+        <h2 class="text-xl font-semibold m-12 p-12 text-center">{{ success_message }}</h1>
+
+        {% else %}
+        <h1 class="text-2xl font-semibold mb-12 text-center">{% trans "Contact" %}</h1>
+        <form class="mt-6" method="POST">
+
+            {% csrf_token %}
+            
+            {% for field in form %}
+                {{ field }}
+            {% endfor %}
+
+            <div class="flex justify-center">
+                <button type="submit" class="primaryAction w-2/3 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded mt-4">
+                    {% trans "Submit" %}
+                </button>
+            </div>
+        </form>
+
+        {% comment %} <p class="mt-4 text-center text-gray-300">
+            {% blocktrans %}Feel free to contact us via email at 
+            <a href="mailto:info@example.com" class="text-blue-500 hover:underline">info@example.com</a>
+            {% endblocktrans %}
+        </p> {% endcomment %}
+        {% endif %}  
+        
+    </div>
+</main>
+{% endblock %}

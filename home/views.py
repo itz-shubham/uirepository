@@ -4,8 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator
 from requests import Request
 
-from .models import Post, User
-from .forms import PostUploadForm, PostUploadModelForm
+from .models import Post, User, Contact
+from .forms import PostUploadForm, PostUploadModelForm, ContactModelForm
 
 def home(request:Request):
     posts = Post.objects.order_by('-datetime').all()
@@ -29,7 +29,7 @@ def post(request:Request, post_url:str):
                 return HttpResponse("You do not have permission to delete this post", 403)
         elif request.POST['type'] == 'like':
             if request.user.is_anonymous:
-                return HttpResponseRedirect(f'/accounts/login')
+                return HttpResponseRedirect(f'/accounts/login/?next=/post/{post.url}',)
             elif post and (post.author != request.user):
                 if liked:
                     post.likes.remove(request.user) 
@@ -130,3 +130,31 @@ def profile(request):
 
     return render(request, 'profile.html', context={'errors': errors})
 
+
+
+def privacy_policy(request: Request):
+    return render(request, 'privacy-policy.html')
+
+
+def contact(request:Request):
+    success_message = ''
+    if request.method == 'POST':
+        form = ContactModelForm(request.POST)
+        if form.is_valid():
+            contact = Contact(
+                name = form.cleaned_data['name'],
+                email = form.cleaned_data['email'],
+                user = request.user if not request.user.is_anonymous else None,
+                message_type = form.cleaned_data['message_type'],
+                message = form.cleaned_data['message'],
+            )
+            contact.save()
+            success_message = "The message has been successfully sent!"
+
+    else:
+       initial_value = {}
+       if not request.user.is_anonymous:
+           initial_value = {'name':f'{request.user.first_name} {request.user.last_name}', 'email': request.user.email}
+       form = ContactModelForm(initial=initial_value),
+       
+    return render(request, 'contact.html', context={'form':form, 'success_message':success_message})
