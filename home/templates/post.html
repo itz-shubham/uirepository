@@ -4,6 +4,12 @@
 
 {% load static %}
 {% block extra_head %}
+<meta data-rh="true" name="title" content="{{ post.title }}">
+<meta data-rh="true" property="og:url" content="{{ post.url }}">
+{% comment %} <meta data-rh="true" property="og:type" content="{{ post.}}"> {% endcomment %}
+<meta data-rh="true" property="og:title" content="{{ post.title }}">
+{% comment %} <meta data-rh="true" property="og:description" content="{{ post.content }}"> {% endcomment %}
+<meta data-rh="true" property="og:image" content="/uploads/{{ post.post_image }}">
 <link href="{% static 'mdeditor/css/editormd.min.css' %}" rel="stylesheet">
 <link href="{% static 'mdeditor/css/editormd.preview.css' %}" rel="stylesheet">
 <style>
