@@ -5,15 +5,15 @@ from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = False
+DEBUG = True
 
-if DEBUG:
-    ALLOWED_HOSTS = ['*']
-else:
-    ALLOWED_HOSTS = ['127.0.0.1', '64.227.150.250', 'localhost', 'uirepository.com', 'www.uirepository.com', 'www.google.com']
+# if DEBUG:
+#     ALLOWED_HOSTS = ['*']
+# else:
+#     ALLOWED_HOSTS = ['127.0.0.1', '64.227.150.250', 'localhost', 'uirepository.com', 'www.uirepository.com', 'www.google.com']
 
-if not DEBUG:
-    CSRF_TRUSTED_ORIGINS = ['https://*.uirepository.com','https://uirepository.com']
+# if not DEBUG:
+#     CSRF_TRUSTED_ORIGINS = ['https://*.uirepository.com','https://uirepository.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
