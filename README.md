@@ -29,22 +29,22 @@ Welcome to the **UI Repository** Django project! This project is created by me t
 
 ## Screenshots
 
-![UI Repository Homepage](https://raw.githubusercontent.com/Itz-Shubham/uirepository/main/screenshots/homepage.png)
+![UI Repository Homepage](/screenshots/homepage.png)
 *Homepage for UiRepository.*
 
-![UI Repository Login](https://raw.githubusercontent.com/Itz-Shubham/uirepository/main/screenshots/loginpage.png)
+![UI Repository Login](/screenshots/loginpage.png)
 *SignIn page for UiRepository with Google Login.*
 
-![UI Repository Upload Page](https://raw.githubusercontent.com/Itz-Shubham/uirepository/main/screenshots/uploadpage.png)
+![UI Repository Upload Page](/screenshots/uploadpage.png)
 *Post upload page with markdown editor*
 
-![UI Repository Author Section](https://raw.githubusercontent.com/Itz-Shubham/uirepository/main/screenshots/author_section.png)
+![UI Repository Author Section](/screenshots/author_section.png)
 *Edit and Delete post options for post author*
 
-![UI Repository Upload Page](https://raw.githubusercontent.com/Itz-Shubham/uirepository/main/screenshots/author_section.png)
+![UI Repository Upload Page](/screenshots/author_section.png)
 *Post upload page with markdown editor*
 
-![UI Repository Post](https://raw.githubusercontent.com/Itz-Shubham/uirepository/main/screenshots/blog_post.png)
+![UI Repository Post](/screenshots/blog_post.png)
 *Blog post detail page with the 'Buy Me a Coffee' button for supporting author*
 
 
